@@ -1,93 +1,92 @@
-//wrapper controls app
+//wrapper controls the app
 function getWord() {
-    //retrieve the word
+    //get the user's word
     let word = document.getElementById("word").value.toLowerCase();
 
-    //remove spaces
+    //check for spaces
     if (word.indexOf(' ') >= 0) {
         word = word.split(" ").join("");
     }
 
-    //remove apostrophe
+    //check for apostrophes
     if (word.indexOf("'") >= 0) {
         word = word.split("'").join("");
     }
 
-    //remove comma
+    //check for commas
     if (word.indexOf(",") >= 0) {
         word = word.split(",").join("");
     }
 
-    //remove exclamations
+    //check for exclamations
     if (word.indexOf("!") >= 0) {
         word = word.split("!").join("");
     }
 
-    //remove periods
+    //check for periods
     if (word.indexOf(".") >= 0) {
         word = word.split(".").join("");
     }
 
-    //remove hyphens
+    //check for dashes 
     if (word.indexOf("-") >= 0) {
         word = word.split("-").join("");
     }
 
-    //remove colons
+    //check for colons
     if (word.indexOf(":") >= 0) {
         word = word.split(":").join("");
     }
 
 
-    //stores rev word
+    //store the reversed word
     let revWord = flipWord(word);
-    //pass the original and reverse and compare
+    //pass original and rev to compare funct
     let result = compareWord(word, revWord);
-    //pass the original and reverse to display
+    //pass the original and rev to display funct
     displayResults(word, revWord, result);
 };
 
-//reverses the string
 function flipWord(word) {
 
-    //variable stores
+    //will store reverse word
     let revWord = "";
 
-    //loops through one letter at a time
+    //loop through one letter at a time
     for (let index = word.length - 1; index >= 0; index--) {
-        //store the letters
+        //store the letter
         let letter = word[index];
 
-        //add letters
+        //add letter to variable above
         revWord += letter;
     }
 
-    //after the loop
+    //send back reversed word after loop
     return revWord;
 }
 
-//this function compares the two strings
+//compares two strings and returns value
 function compareWord(word, revWord) {
     let result = word.localeCompare(revWord)
 
     return result;
 }
 
-//prints to screen
+//takes info and prints to screen
 function displayResults(word, revWord, result) {
-    //access the output area
+    //accesses the output
     let output = document.getElementById("output");
 
-    //replace the <p>
-    output.innerText = `You entered the word ${word}. Reversed is ${revWord}.`;
+    //replace what is in <p> element
+    output.innerText = `You entered ${word}. ${revWord} is the reverse!`;
 
-    //access results
+    //accesses the results
     let resultDisplay = document.getElementById("resultDisplay");
 
-    //replace resultDisplay
+    //replaces in resultDisplay <p> 
     if (result == 0) {
-        resultDisplay.innerText = "The word you entered IS a palindrome."
+        resultDisplay.innerText = "This word is a palindrome. Congrats!"
     } else {
-        resultDisplay.innerText = "The word you entered is NOT a palindrome."
+        resultDisplay.innerText = "This word isn't a palindrome."
     }
 };
